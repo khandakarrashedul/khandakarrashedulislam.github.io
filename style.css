@@ -853,3 +853,13 @@ div.hero-photo {
   bottom: auto;
   transform: translateY(-50%);
 }
+/* ---------- Publications: DOI button stays visible in Compact view ---------- */
+.pub-card:not(.is-open) .pub-links .btn:not(.is-doi) {
+  display: none;
+}
+.pub-card:not(.is-open) .pub-links {
+  margin-top: 0.6rem;
+}
+.pub-card:not(.is-open) .pub-links.no-doi {
+  display: none;
+}
