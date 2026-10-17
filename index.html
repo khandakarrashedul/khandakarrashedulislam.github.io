@@ -14,380 +14,463 @@
 
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ===================== HEADER / NAVIGATION ===================== -->
-  <header class="site-header">
-    <div class="container header-inner">
+  <!-- Dark overlay behind the sidebar on tablet and mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay" hidden></div>
 
-      <a class="brand" href="#home">
-        <span class="brand-avatar" aria-hidden="true">KRI</span>
-        <span class="brand-text">
-          <span class="brand-name">Khandakar Rashedul Islam</span>
-          <span class="brand-title">Environmental Science Researcher</span>
-        </span>
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Site menu">
+
+    <button class="icon-btn sidebar-close" id="sidebar-close" type="button" aria-label="Close menu">✕</button>
+
+    <a class="side-brand" href="#home">
+      <!--
+        SIDEBAR PHOTO: to use your photo, upload assets/profile.jpg, then replace the <span> line below with:
+        <img class="side-avatar" src="assets/profile.jpg" alt="Khandakar Rashedul Islam">
+      -->
+      <span class="side-avatar" aria-hidden="true">KRI</span>
+      <span class="side-brand-text">
+        <span class="side-name">Khandakar Rashedul Islam</span>
+        <span class="side-title">Environmental Science Researcher</span>
+      </span>
+    </a>
+
+    <nav class="side-nav" aria-label="Main navigation">
+      <ul>
+        <li>
+          <a href="#about">
+            <span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+            About
+          </a>
+        </li>
+        <li>
+          <a href="#research">
+            <span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/></svg></span>
+            Research
+          </a>
+        </li>
+        <li>
+          <a href="#publications">
+            <span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+            Publications
+          </a>
+        </li>
+        <li>
+          <a href="#cv">
+            <span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.5-1.5 5.5-1.5 6 0M15 10h3M15 14h3"/></svg></span>
+            CV
+          </a>
+        </li>
+        <li>
+          <a href="#contact">
+            <span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!--
+      PROFILE LINKS (bottom of sidebar). This is the ONLY place you need to edit your profile links.
+      The buttons in the Contact section copy these automatically.
+      To activate an icon: replace href="#contact" with your real link and delete the word is-placeholder.
+      To remove an icon: delete its whole <a ...> ... </a> block.
+    -->
+    <div class="sidebar-links" aria-label="Academic profiles">
+      <a class="profile-icon is-placeholder" href="#contact" data-profile="scholar" title="Google Scholar" aria-label="Google Scholar">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/></svg>
       </a>
+      <a class="profile-icon is-placeholder" href="#contact" data-profile="orcid" title="ORCID" aria-label="ORCID">
+        <span aria-hidden="true">iD</span>
+      </a>
+      <a class="profile-icon is-placeholder" href="#contact" data-profile="researchgate" title="ResearchGate" aria-label="ResearchGate">
+        <span aria-hidden="true">RG</span>
+      </a>
+      <a class="profile-icon is-placeholder" href="#contact" data-profile="linkedin" title="LinkedIn" aria-label="LinkedIn">
+        <span aria-hidden="true">in</span>
+      </a>
+    </div>
 
-      <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#cv">CV</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+  </aside>
 
-      <div class="header-actions">
-        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme">◐</button>
-        <button class="icon-btn nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
+  <!-- ===================== MAIN AREA ===================== -->
+  <div class="main-area">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
         </button>
+        <div class="clock">
+          <span class="clock-time" id="clock-time">--:--</span>
+          <span class="clock-date" id="clock-date"></span>
+        </div>
       </div>
 
-    </div>
-  </header>
+      <div class="topbar-right">
+        <label class="visually-hidden" for="theme-select">Colour theme</label>
+        <select class="theme-select" id="theme-select">
+          <option value="light">🌞 Light</option>
+          <option value="dark">🌙 Dark</option>
+          <option value="forest">🌲 Forest</option>
+        </select>
+      </div>
+    </header>
 
-  <main id="main">
+    <main id="main">
 
-    <!-- ===================== HOME / HERO ===================== -->
-    <section class="hero" id="home">
-      <div class="container hero-grid">
+      <!-- ===================== HOME / HERO ===================== -->
+      <section class="hero" id="home">
+        <div class="container">
+          <div class="hero-card reveal">
 
-        <div class="hero-text">
-          <p class="eyebrow">Researcher</p>
-          <h1>Khandakar Rashedul Islam</h1>
-          <p class="hero-subtitle">Environmental Science Researcher</p>
-          <p class="hero-focus">Microplastics · Emerging Contaminants · Environmental Remediation</p>
-          <p class="hero-intro">
-            I hold a BSc and an MS in Environmental Science from Jashore University of Science and Technology (JUST), Bangladesh.
-            My research focuses on microplastics pollution, its interactions with emerging contaminants such as PFAS,
-            and adsorption- and biochar-based remediation.
-          </p>
-          <div class="button-row">
-            <a class="btn btn-primary" href="#publications">Publications</a>
-            <a class="btn btn-outline" href="#cv">Curriculum Vitae</a>
+            <div class="hero-text">
+              <p class="pill"><span class="pill-dot"></span>Researcher · Academic Portfolio</p>
+              <h1>Khandakar Rashedul Islam</h1>
+              <p class="hero-subtitle">Environmental Science Researcher</p>
+              <p class="hero-intro">
+                I hold a BSc and an MS in Environmental Science from Jashore University of Science and Technology (JUST), Bangladesh.
+                My research focuses on microplastics pollution, its interactions with emerging contaminants such as PFAS,
+                and adsorption- and biochar-based remediation.
+              </p>
+              <div class="button-row">
+                <a class="btn btn-primary" href="#publications">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v13c-3-1-6-1-8 1-2-2-5-2-8-1z"/><path d="M12 6v13"/></svg>
+                  Publications
+                </a>
+                <a class="btn btn-outline" href="#cv">
+                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.5-1.5 5.5-1.5 6 0M15 10h3M15 14h3"/></svg>
+                  Curriculum Vitae
+                </a>
+              </div>
+            </div>
+
+            <div class="hero-photo-wrap">
+              <!--
+                PROFILE PHOTO: this circle is a placeholder.
+                To use your photo, upload it as assets/profile.jpg, then DELETE the whole <div class="hero-photo">...</div>
+                below and put this single line in its place:
+                <img class="hero-photo" src="assets/profile.jpg" alt="Portrait of Khandakar Rashedul Islam">
+              -->
+              <div class="hero-photo" role="img" aria-label="Profile photo placeholder">
+                <span>KRI</span>
+              </div>
+            </div>
+
           </div>
         </div>
+      </section>
 
-        <div class="hero-photo-wrap">
+      <!-- ===================== STATISTICS =====================
+           To update your numbers later, change the number inside each
+           <span class="stat-number"> and the label next to it. -->
+      <section class="stats" aria-label="Research at a glance">
+        <div class="container stats-grid">
+          <div class="card stat reveal">
+            <span class="stat-number">16</span>
+            <span class="stat-label">Published papers in Q1 journals</span>
+          </div>
+          <div class="card stat reveal">
+            <span class="stat-number">10</span>
+            <span class="stat-label">Microplastics-related papers</span>
+          </div>
+          <div class="card stat reveal">
+            <span class="stat-number">2022</span>
+            <span class="stat-label">Research Assistant at AAN since February</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="container"><hr class="divider"></div>
+
+      <!-- ===================== ABOUT ===================== -->
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Background</p>
+            <h2>About</h2>
+          </div>
+
+          <div class="about-grid">
+            <div class="card reveal">
+              <h3>Biography</h3>
+              <p>
+                I am an environmental science researcher with a BSc and an MS in Environmental Science from
+                Jashore University of Science and Technology (JUST), Bangladesh. My work centres on microplastics
+                pollution: its fate, transformation and transport in coastal environments, agricultural soils,
+                water, sediments, aquaculture systems and other environmental matrices.
+              </p>
+              <p>
+                Since February 2022 I have worked part-time as a Research Assistant in the Environmental Laboratory
+                of the Asia Arsenic Network (AAN), Bangladesh. I also study how microplastics interact with emerging
+                contaminants such as per- and polyfluoroalkyl substances (PFAS), and I am interested in
+                adsorption-based wastewater treatment and biochar-based environmental remediation.
+              </p>
+            </div>
+
+            <div class="stack">
+              <div class="card reveal">
+                <h3>Education</h3>
+                <ul class="plain-list">
+                  <li>
+                    <strong>MS in Environmental Science</strong>
+                    <span class="item-meta">Jashore University of Science and Technology (JUST), Bangladesh · <span class="placeholder-text">[add years]</span></span>
+                  </li>
+                  <li>
+                    <strong>BSc in Environmental Science</strong>
+                    <span class="item-meta">Jashore University of Science and Technology (JUST), Bangladesh · <span class="placeholder-text">[add years]</span></span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="card reveal">
+                <h3>Experience</h3>
+                <ul class="plain-list">
+                  <li>
+                    <strong>Research Assistant (part-time)</strong>
+                    <span class="item-meta">Environmental Laboratory, Asia Arsenic Network (AAN), Bangladesh · February 2022 – present</span>
+                  </li>
+                  <li>
+                    <strong>Environmental research</strong>
+                    <span class="item-meta">Jashore University of Science and Technology (JUST) · <span class="placeholder-text">[add role and years]</span></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="card skills-card reveal">
+            <h3>Laboratory and Analytical Experience</h3>
+            <ul class="tag-list">
+              <li class="tag">AAS</li>
+              <li class="tag">ICP-OES</li>
+              <li class="tag">GC-MS</li>
+              <li class="tag">FTIR</li>
+              <li class="tag">FE-SEM</li>
+              <li class="tag">Environmental sampling</li>
+              <li class="tag">Sample preparation</li>
+              <li class="tag">Laboratory analysis</li>
+              <li class="tag">QA/QC</li>
+              <li class="tag">Research data analysis</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== RESEARCH ===================== -->
+      <section class="section" id="research">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Focus Areas</p>
+            <h2>Research Interests</h2>
+          </div>
+
+          <div class="grid-3">
+
+            <article class="card reveal">
+              <h3>Microplastics: Pollution, Fate and Transport</h3>
+              <p>Occurrence, fate, transformation and transport of microplastics in coastal environments, agricultural soils, water, sediments and aquaculture systems.</p>
+              <ul class="tag-list">
+                <li class="tag">Microplastics</li>
+                <li class="tag">Coastal</li>
+                <li class="tag">Soil</li>
+                <li class="tag">Sediment</li>
+                <li class="tag">Aquaculture</li>
+              </ul>
+            </article>
+
+            <article class="card reveal">
+              <h3>Microplastics and PFAS Interactions</h3>
+              <p>Interactions between microplastics and emerging contaminants, particularly per- and polyfluoroalkyl substances (PFAS).</p>
+              <ul class="tag-list">
+                <li class="tag">PFAS</li>
+                <li class="tag">Emerging contaminants</li>
+                <li class="tag">Interactions</li>
+              </ul>
+            </article>
+
+            <article class="card reveal">
+              <h3>Pollution Monitoring and Risk Assessment</h3>
+              <p>Environmental pollution monitoring and risk assessment across environmental matrices.</p>
+              <ul class="tag-list">
+                <li class="tag">Monitoring</li>
+                <li class="tag">Risk assessment</li>
+                <li class="tag">Water quality</li>
+              </ul>
+            </article>
+
+            <article class="card reveal">
+              <h3>Adsorption-Based Wastewater Treatment</h3>
+              <p>Adsorption-based approaches for treating contaminated wastewater.</p>
+              <ul class="tag-list">
+                <li class="tag">Adsorption</li>
+                <li class="tag">Wastewater treatment</li>
+              </ul>
+            </article>
+
+            <article class="card reveal">
+              <h3>Biochar-Based Remediation</h3>
+              <p>Biochar-based environmental remediation of polluted water and soil.</p>
+              <ul class="tag-list">
+                <li class="tag">Biochar</li>
+                <li class="tag">Remediation</li>
+              </ul>
+            </article>
+
+            <article class="card reveal">
+              <h3>Heavy Metals and Environmental Chemistry</h3>
+              <p>Heavy metals and potentially toxic elements in environmental matrices, environmental chemistry and water quality.</p>
+              <ul class="tag-list">
+                <li class="tag">Heavy metals</li>
+                <li class="tag">Potentially toxic elements</li>
+                <li class="tag">Environmental chemistry</li>
+              </ul>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== PUBLICATIONS ===================== -->
+      <section class="section" id="publications">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Output</p>
+            <h2>Publications</h2>
+            <p class="section-lead">
+              Published papers in Q1 journals, together with additional manuscripts that are submitted or under review.
+            </p>
+          </div>
+
+          <!-- DELETE THIS NOTICE once you have replaced the placeholder entries below. -->
+          <div class="notice reveal">
+            <strong>Placeholder entries.</strong> The three entries below are layout examples only. They are not real
+            publications. Replace each one with your real article details, then delete this notice.
+          </div>
+
+          <div class="filter-bar reveal" role="group" aria-label="Filter publications">
+            <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-btn" type="button" data-filter="microplastics" aria-pressed="false">Microplastics</button>
+            <button class="filter-btn" type="button" data-filter="other" aria-pressed="false">Other topics</button>
+            <button class="filter-btn" type="button" data-filter="in-progress" aria-pressed="false">Submitted / under review</button>
+          </div>
+
           <!--
-            PROFILE PHOTO: this grey box is a placeholder.
-            To use your photo, upload it as assets/profile.jpg, then DELETE the whole <div class="hero-photo">...</div>
-            below and put this single line in its place:
-            <img class="hero-photo" src="assets/profile.jpg" alt="Portrait of Khandakar Rashedul Islam">
+            HOW TO ADD A PUBLICATION: copy one complete <article class="pub-card"> ... </article> block,
+            paste it below the last one, and edit the text. The data-tags words control the filter buttons:
+              microplastics   -> shows under "Microplastics"
+              other           -> shows under "Other topics"
+              in-progress     -> shows under "Submitted / under review"
+              published       -> (label only, not used by a button)
+            Put a space between words, for example: data-tags="microplastics published"
           -->
-         <img class="hero-photo" src="assets/profile.jpg" alt="Portrait of Khandakar Rashedul Islam">
-        </div>
+          <div class="pub-list">
 
-      </div>
-    </section>
+            <article class="card pub-card reveal" data-tags="microplastics published">
+              <div class="pub-badges">
+                <span class="badge">Published</span>
+                <span class="badge badge-placeholder">Placeholder</span>
+              </div>
+              <h3 class="pub-title">[Article title: replace with your real title]</h3>
+              <p class="pub-authors">[Author list: replace, e.g. Surname A., Islam K. R., Surname B.]</p>
+              <p class="pub-journal"><em>[Journal name]</em> · <span class="pub-year">[Year]</span></p>
+              <div class="pub-links">
+                <!-- To activate: replace href with your DOI link and delete the word is-placeholder -->
+                <a class="btn btn-outline btn-small is-placeholder" href="#publications">DOI</a>
+              </div>
+            </article>
 
-    <!-- ===================== STATISTICS =====================
-         To update your numbers later, change the number inside each
-         <span class="stat-number"> and the label next to it. -->
-    <section class="stats" aria-label="Research at a glance">
-      <div class="container stats-grid">
-        <div class="card stat reveal">
-          <span class="stat-number">16</span>
-          <span class="stat-label">Published papers in Q1 journals</span>
-        </div>
-        <div class="card stat reveal">
-          <span class="stat-number">10</span>
-          <span class="stat-label">Microplastics-related papers</span>
-        </div>
-        <div class="card stat reveal">
-          <span class="stat-number">2022</span>
-          <span class="stat-label">Research Assistant at AAN since February</span>
-        </div>
-      </div>
-    </section>
+            <article class="card pub-card reveal" data-tags="other published">
+              <div class="pub-badges">
+                <span class="badge">Published</span>
+                <span class="badge badge-placeholder">Placeholder</span>
+              </div>
+              <h3 class="pub-title">[Article title: replace with your real title]</h3>
+              <p class="pub-authors">[Author list: replace]</p>
+              <p class="pub-journal"><em>[Journal name]</em> · <span class="pub-year">[Year]</span></p>
+              <div class="pub-links">
+                <a class="btn btn-outline btn-small is-placeholder" href="#publications">DOI</a>
+              </div>
+            </article>
 
-    <!-- ===================== ABOUT ===================== -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Background</p>
-          <h2>About</h2>
-        </div>
+            <article class="card pub-card reveal" data-tags="microplastics in-progress">
+              <div class="pub-badges">
+                <span class="badge">Under review</span>
+                <span class="badge badge-placeholder">Placeholder</span>
+              </div>
+              <h3 class="pub-title">[Manuscript title: replace with your real title]</h3>
+              <p class="pub-authors">[Author list: replace]</p>
+              <p class="pub-journal"><em>[Journal name, if you wish to show it]</em> · <span class="pub-year">[Year]</span></p>
+            </article>
 
-        <div class="about-grid">
-          <div class="card reveal">
-            <h3>Biography</h3>
-            <p>
-              I am an environmental science researcher with a BSc and an MS in Environmental Science from
-              Jashore University of Science and Technology (JUST), Bangladesh. My work centres on microplastics
-              pollution: its fate, transformation and transport in coastal environments, agricultural soils,
-              water, sediments, aquaculture systems and other environmental matrices.
-            </p>
-            <p>
-              Since February 2022 I have worked part-time as a Research Assistant in the Environmental Laboratory
-              of the Asia Arsenic Network (AAN), Bangladesh. I also study how microplastics interact with emerging
-              contaminants such as per- and polyfluoroalkyl substances (PFAS), and I am interested in
-              adsorption-based wastewater treatment and biochar-based environmental remediation.
+          </div>
+
+          <p class="empty-message" id="pub-empty" hidden>No publications match this filter yet.</p>
+        </div>
+      </section>
+
+      <!-- ===================== CV ===================== -->
+      <section class="section" id="cv">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Resume</p>
+            <h2>Curriculum Vitae</h2>
+          </div>
+          <div class="card cv-card reveal">
+            <p>View or download my curriculum vitae as a PDF.</p>
+            <!-- This link works once you upload your CV as assets/cv.pdf -->
+            <a class="btn btn-primary" href="assets/cv.pdf" target="_blank" rel="noopener">View / Download CV (PDF)</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== CONTACT ===================== -->
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="section-head reveal">
+            <p class="eyebrow">Reach out</p>
+            <h2>Get in Touch</h2>
+            <p class="section-lead">
+              For research collaborations, PhD supervision enquiries or academic networking, please get in touch.
             </p>
           </div>
 
-          <div class="stack">
+          <div class="contact-grid">
             <div class="card reveal">
-              <h3>Education</h3>
-              <ul class="plain-list">
-                <li>
-                  <strong>MS in Environmental Science</strong>
-                  <span class="item-meta">Jashore University of Science and Technology (JUST), Bangladesh · <span class="placeholder-text">[add years]</span></span>
-                </li>
-                <li>
-                  <strong>BSc in Environmental Science</strong>
-                  <span class="item-meta">Jashore University of Science and Technology (JUST), Bangladesh · <span class="placeholder-text">[add years]</span></span>
-                </li>
+              <h3>Email</h3>
+              <!-- To activate: replace the href and the text with your email, and delete is-placeholder.
+                   Example: <a href="mailto:name@example.com">name@example.com</a> -->
+              <p class="contact-email"><a class="is-placeholder" href="#contact">[your professional email]</a></p>
+              <h3>Affiliation</h3>
+              <p>Environmental Laboratory, Asia Arsenic Network (AAN), Bangladesh</p>
+            </div>
+
+            <div class="card reveal">
+              <h3>Academic Profiles</h3>
+              <!-- These buttons copy their links from the sidebar icons automatically. Do not edit them here. -->
+              <ul class="link-list">
+                <li><a class="btn btn-outline btn-small profile-sync is-placeholder" href="#contact" data-profile="scholar">Google Scholar</a></li>
+                <li><a class="btn btn-outline btn-small profile-sync is-placeholder" href="#contact" data-profile="orcid">ORCID</a></li>
+                <li><a class="btn btn-outline btn-small profile-sync is-placeholder" href="#contact" data-profile="researchgate">ResearchGate</a></li>
+                <li><a class="btn btn-outline btn-small profile-sync is-placeholder" href="#contact" data-profile="linkedin">LinkedIn</a></li>
               </ul>
             </div>
-
-            <div class="card reveal">
-              <h3>Experience</h3>
-              <ul class="plain-list">
-                <li>
-                  <strong>Research Assistant (part-time)</strong>
-                  <span class="item-meta">Environmental Laboratory, Asia Arsenic Network (AAN), Bangladesh · February 2022 – present</span>
-                </li>
-                <li>
-                  <strong>Environmental research</strong>
-                  <span class="item-meta">Jashore University of Science and Technology (JUST) · <span class="placeholder-text">[add role and years]</span></span>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
+      </section>
 
-        <div class="card skills-card reveal">
-          <h3>Laboratory and Analytical Experience</h3>
-          <ul class="tag-list">
-            <li class="tag">AAS</li>
-            <li class="tag">ICP-OES</li>
-            <li class="tag">GC-MS</li>
-            <li class="tag">FTIR</li>
-            <li class="tag">FE-SEM</li>
-            <li class="tag">Environmental sampling</li>
-            <li class="tag">Sample preparation</li>
-            <li class="tag">Laboratory analysis</li>
-            <li class="tag">QA/QC</li>
-            <li class="tag">Research data analysis</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    </main>
 
-    <!-- ===================== RESEARCH ===================== -->
-    <section class="section" id="research">
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Focus Areas</p>
-          <h2>Research Interests</h2>
-        </div>
-
-        <div class="grid-3">
-
-          <article class="card reveal">
-            <h3>Microplastics: Pollution, Fate and Transport</h3>
-            <p>Occurrence, fate, transformation and transport of microplastics in coastal environments, agricultural soils, water, sediments and aquaculture systems.</p>
-            <ul class="tag-list">
-              <li class="tag">Microplastics</li>
-              <li class="tag">Coastal</li>
-              <li class="tag">Soil</li>
-              <li class="tag">Sediment</li>
-              <li class="tag">Aquaculture</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3>Microplastics and PFAS Interactions</h3>
-            <p>Interactions between microplastics and emerging contaminants, particularly per- and polyfluoroalkyl substances (PFAS).</p>
-            <ul class="tag-list">
-              <li class="tag">PFAS</li>
-              <li class="tag">Emerging contaminants</li>
-              <li class="tag">Interactions</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3>Pollution Monitoring and Risk Assessment</h3>
-            <p>Environmental pollution monitoring and risk assessment across environmental matrices.</p>
-            <ul class="tag-list">
-              <li class="tag">Monitoring</li>
-              <li class="tag">Risk assessment</li>
-              <li class="tag">Water quality</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3>Adsorption-Based Wastewater Treatment</h3>
-            <p>Adsorption-based approaches for treating contaminated wastewater.</p>
-            <ul class="tag-list">
-              <li class="tag">Adsorption</li>
-              <li class="tag">Wastewater treatment</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3>Biochar-Based Remediation</h3>
-            <p>Biochar-based environmental remediation of polluted water and soil.</p>
-            <ul class="tag-list">
-              <li class="tag">Biochar</li>
-              <li class="tag">Remediation</li>
-            </ul>
-          </article>
-
-          <article class="card reveal">
-            <h3>Heavy Metals and Environmental Chemistry</h3>
-            <p>Heavy metals and potentially toxic elements in environmental matrices, environmental chemistry and water quality.</p>
-            <ul class="tag-list">
-              <li class="tag">Heavy metals</li>
-              <li class="tag">Potentially toxic elements</li>
-              <li class="tag">Environmental chemistry</li>
-            </ul>
-          </article>
-
-        </div>
+        <p>© <span id="current-year">2026</span> Khandakar Rashedul Islam. All rights reserved.</p>
       </div>
-    </section>
+    </footer>
 
-    <!-- ===================== PUBLICATIONS ===================== -->
-    <section class="section" id="publications">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Output</p>
-          <h2>Publications</h2>
-          <p class="section-lead">
-            Published papers in Q1 journals, together with additional manuscripts that are submitted or under review.
-          </p>
-        </div>
-
-        <!-- DELETE THIS NOTICE once you have replaced the placeholder entries below. -->
-        <div class="notice reveal">
-          <strong>Placeholder entries.</strong> The three entries below are layout examples only. They are not real
-          publications. Replace each one with your real article details, then delete this notice.
-        </div>
-
-        <div class="filter-bar reveal" role="group" aria-label="Filter publications">
-          <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter-btn" type="button" data-filter="microplastics" aria-pressed="false">Microplastics</button>
-          <button class="filter-btn" type="button" data-filter="other" aria-pressed="false">Other topics</button>
-          <button class="filter-btn" type="button" data-filter="in-progress" aria-pressed="false">Submitted / under review</button>
-        </div>
-
-        <!--
-          HOW TO ADD A PUBLICATION: copy one complete <article class="pub-card"> ... </article> block,
-          paste it below the last one, and edit the text. The data-tags words control the filter buttons:
-            microplastics   -> shows under "Microplastics"
-            other           -> shows under "Other topics"
-            in-progress     -> shows under "Submitted / under review"
-            published       -> (label only, not used by a button)
-          Put a space between words, for example: data-tags="microplastics published"
-        -->
-        <div class="pub-list">
-
-          <article class="card pub-card reveal" data-tags="microplastics published">
-            <div class="pub-badges">
-              <span class="badge">Published</span>
-              <span class="badge badge-placeholder">Placeholder</span>
-            </div>
-            <h3 class="pub-title">Tracing the Journey of Microplastics in the Northern Bay of Bengal Marine Ecosystems, Bangladesh: A Comprehensive Study on Source Appointments, Distribution, and Potential Risks.</h3>
-            <p class="pub-authors"> Islam K. R. et al.,.</p>
-            <p class="pub-journal"><em>Journal of Hazardous Material Advances</em> · <span class="pub-year">2025</span></p>
-            <div class="pub-links">
-              <!-- To activate: replace href with your DOI link and delete the word is-placeholder -->
-              <a class="btn btn-outline btn-small" href="https://doi.org/10.1016/j.hazadv.2025.100829">DOI</a>
-            </div>
-          </article>
-
-          <article class="card pub-card reveal" data-tags="other published">
-            <div class="pub-badges">
-              <span class="badge">Published</span>
-              <span class="badge badge-placeholder">Placeholder</span>
-            </div>
-            <h3 class="pub-title">[Article title: replace with your real title]</h3>
-            <p class="pub-authors">[Author list: replace]</p>
-            <p class="pub-journal"><em>[Journal name]</em> · <span class="pub-year">[Year]</span></p>
-            <div class="pub-links">
-              <a class="btn btn-outline btn-small is-placeholder" href="#publications">DOI</a>
-            </div>
-          </article>
-
-          <article class="card pub-card reveal" data-tags="microplastics in-progress">
-            <div class="pub-badges">
-              <span class="badge">Under review</span>
-              <span class="badge badge-placeholder">Placeholder</span>
-            </div>
-            <h3 class="pub-title">[Manuscript title: replace with your real title]</h3>
-            <p class="pub-authors">[Author list: replace]</p>
-            <p class="pub-journal"><em>[Journal name, if you wish to show it]</em> · <span class="pub-year">[Year]</span></p>
-          </article>
-
-        </div>
-
-        <p class="empty-message" id="pub-empty" hidden>No publications match this filter yet.</p>
-      </div>
-    </section>
-
-    <!-- ===================== CV ===================== -->
-    <section class="section" id="cv">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Resume</p>
-          <h2>Curriculum Vitae</h2>
-        </div>
-        <div class="card cv-card reveal">
-          <p>View or download my curriculum vitae as a PDF.</p>
-          <!-- This link works once you upload your CV as assets/cv.pdf -->
-          <a class="btn btn-primary" href="assets/cv.pdf" target="_blank" rel="noopener">View / Download CV (PDF)</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== CONTACT ===================== -->
-    <section class="section" id="contact">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Reach out</p>
-          <h2>Get in Touch</h2>
-          <p class="section-lead">
-            For research collaborations, PhD supervision enquiries or academic networking, please get in touch.
-          </p>
-        </div>
-
-        <div class="contact-grid">
-          <div class="card reveal">
-            <h3>Email</h3>
-            <!-- To activate: replace the href and the text with your email, and delete is-placeholder.
-                 Example: <a href="mailto:name@example.com">name@example.com</a> -->
-            <p class="contact-email"><a class="is-placeholder" href="#contact">[your professional email]</a></p>
-            <h3>Affiliation</h3>
-            <p>Environmental Laboratory, Asia Arsenic Network (AAN), Bangladesh</p>
-          </div>
-
-          <div class="card reveal">
-            <h3>Academic Profiles</h3>
-            <!-- To activate a button: replace href="#contact" with your real profile link
-                 and delete the word is-placeholder. Delete any button you do not need. -->
-            <ul class="link-list">
-              <li><a class="btn btn-outline btn-small is-placeholder" href="#contact">Google Scholar</a></li>
-              <li><a class="btn btn-outline btn-small is-placeholder" href="#contact">ORCID</a></li>
-              <li><a class="btn btn-outline btn-small is-placeholder" href="#contact">LinkedIn</a></li>
-              <li><a class="btn btn-outline btn-small is-placeholder" href="#contact">ResearchGate</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="site-footer">
-    <div class="container">
-      <p>© <span id="current-year">2026</span> Khandakar Rashedul Islam. All rights reserved.</p>
-    </div>
-  </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
