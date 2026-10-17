@@ -333,14 +333,15 @@
         </div>
       </section>
 
-      <!-- ===================== PUBLICATIONS ===================== -->
+     <!-- ===================== PUBLICATIONS ===================== -->
       <section class="section" id="publications">
         <div class="container">
           <div class="section-head reveal">
-            <p class="eyebrow">Output</p>
-            <h2>Publications</h2>
+            <p class="eyebrow">Publications</p>
+            <h2>Selected Publications</h2>
             <p class="section-lead">
-              Published papers in Q1 journals, together with additional manuscripts that are submitted or under review.
+              Peer-reviewed articles in Q1 journals, plus manuscripts that are submitted or under review.
+              Use the filters to narrow by year, category or keyword.
             </p>
           </div>
 
@@ -350,64 +351,167 @@
             publications. Replace each one with your real article details, then delete this notice.
           </div>
 
-          <div class="filter-bar reveal" role="group" aria-label="Filter publications">
-            <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">All</button>
-            <button class="filter-btn" type="button" data-filter="microplastics" aria-pressed="false">Microplastics</button>
-            <button class="filter-btn" type="button" data-filter="other" aria-pressed="false">Other topics</button>
-            <button class="filter-btn" type="button" data-filter="in-progress" aria-pressed="false">Submitted / under review</button>
+          <!-- Filter panel. The Year and Category lists fill themselves in from your entries below. -->
+          <div class="filter-panel reveal" role="search">
+            <div class="field">
+              <label class="field-label" for="pub-year">Year</label>
+              <select class="field-input" id="pub-year">
+                <option value="all">All Years</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="field-label" for="pub-category">Category</label>
+              <select class="field-input" id="pub-category">
+                <option value="all">All Categories</option>
+              </select>
+            </div>
+            <div class="field field-grow">
+              <label class="field-label" for="pub-search">Search</label>
+              <input class="field-input" id="pub-search" type="search" placeholder="Search publications…" autocomplete="off">
+            </div>
+            <div class="view-toggle" role="group" aria-label="Publication view">
+              <button class="view-btn" type="button" data-view="detail" aria-pressed="true">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+                Detail
+              </button>
+              <button class="view-btn" type="button" data-view="compact" aria-pressed="false">
+                <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 12h16M12 4v16"/></svg>
+                Compact
+              </button>
+            </div>
           </div>
 
           <!--
-            HOW TO ADD A PUBLICATION: copy one complete <article class="pub-card"> ... </article> block,
-            paste it below the last one, and edit the text. The data-tags words control the filter buttons:
-              microplastics   -> shows under "Microplastics"
-              other           -> shows under "Other topics"
-              in-progress     -> shows under "Submitted / under review"
-              published       -> (label only, not used by a button)
-            Put a space between words, for example: data-tags="microplastics published"
+            HOW TO ADD A PUBLICATION
+            Copy one complete <article class="card pub-card ..."> ... </article> block, paste it below the last one,
+            and edit the text. You only edit the visible text. The filters read these parts automatically:
+              - the year          (the text inside class="pub-year", four digits like 2025)
+              - the category      (the text inside class="pub-category")
+              - everything else   (used by the search box)
+            Type badge: change the word Journal / Preprint / Under review, and the class word:
+              type-journal   type-preprint   type-review
+            To add a PDF button: copy the DOI <a ...> line, change the word DOI to PDF and use the PDF link.
           -->
           <div class="pub-list">
 
-            <article class="card pub-card reveal" data-tags="microplastics published">
-              <div class="pub-badges">
-                <span class="badge">Published</span>
-                <span class="badge badge-placeholder">Placeholder</span>
+            <!-- ENTRY 1 (placeholder) -->
+            <article class="card pub-card is-open reveal">
+              <div class="pub-main">
+                <h3 class="pub-title">[Article title: replace with your real title]</h3>
+                <p class="pub-authors">[Author list: replace, e.g. Surname A., Islam K. R., Surname B.]</p>
+                <div class="pub-meta">
+                  <span class="type-badge type-journal">Journal</span>
+                  <span class="type-badge type-placeholder">Placeholder</span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M10 21v-4h4v4"/></svg>
+                    <span class="pub-journal">[Journal name]</span>
+                  </span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg>
+                    <span class="pub-year">[Year]</span>
+                  </span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+                    <span class="pub-category">Microplastics</span>
+                  </span>
+                </div>
+                <div class="pub-extra">
+                  <ul class="tag-list pub-tags">
+                    <li class="tag">[keyword 1]</li>
+                    <li class="tag">[keyword 2]</li>
+                  </ul>
+                  <p class="pub-summary">[Optional short summary of the paper. Delete this line if you do not want one.]</p>
+                  <div class="pub-links">
+                    <!-- To activate: replace href with your DOI link and delete the word is-placeholder -->
+                    <a class="btn btn-outline btn-small is-placeholder" href="#publications">
+                      <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+                      DOI
+                    </a>
+                  </div>
+                </div>
               </div>
-              <h3 class="pub-title">[Article title: replace with your real title]</h3>
-              <p class="pub-authors">[Author list: replace, e.g. Surname A., Islam K. R., Surname B.]</p>
-              <p class="pub-journal"><em>[Journal name]</em> · <span class="pub-year">[Year]</span></p>
-              <div class="pub-links">
-                <!-- To activate: replace href with your DOI link and delete the word is-placeholder -->
-                <a class="btn btn-outline btn-small is-placeholder" href="#publications">DOI</a>
-              </div>
+              <button class="pub-toggle" type="button" aria-expanded="true" aria-label="Collapse details">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+              </button>
             </article>
 
-            <article class="card pub-card reveal" data-tags="other published">
-              <div class="pub-badges">
-                <span class="badge">Published</span>
-                <span class="badge badge-placeholder">Placeholder</span>
+            <!-- ENTRY 2 (placeholder) -->
+            <article class="card pub-card is-open reveal">
+              <div class="pub-main">
+                <h3 class="pub-title">[Article title: replace with your real title]</h3>
+                <p class="pub-authors">[Author list: replace]</p>
+                <div class="pub-meta">
+                  <span class="type-badge type-journal">Journal</span>
+                  <span class="type-badge type-placeholder">Placeholder</span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M10 21v-4h4v4"/></svg>
+                    <span class="pub-journal">[Journal name]</span>
+                  </span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg>
+                    <span class="pub-year">[Year]</span>
+                  </span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+                    <span class="pub-category">Remediation</span>
+                  </span>
+                </div>
+                <div class="pub-extra">
+                  <ul class="tag-list pub-tags">
+                    <li class="tag">[keyword 1]</li>
+                    <li class="tag">[keyword 2]</li>
+                  </ul>
+                  <p class="pub-summary">[Optional short summary of the paper. Delete this line if you do not want one.]</p>
+                  <div class="pub-links">
+                    <a class="btn btn-outline btn-small is-placeholder" href="#publications">
+                      <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>
+                      DOI
+                    </a>
+                  </div>
+                </div>
               </div>
-              <h3 class="pub-title">[Article title: replace with your real title]</h3>
-              <p class="pub-authors">[Author list: replace]</p>
-              <p class="pub-journal"><em>[Journal name]</em> · <span class="pub-year">[Year]</span></p>
-              <div class="pub-links">
-                <a class="btn btn-outline btn-small is-placeholder" href="#publications">DOI</a>
-              </div>
+              <button class="pub-toggle" type="button" aria-expanded="true" aria-label="Collapse details">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+              </button>
             </article>
 
-            <article class="card pub-card reveal" data-tags="microplastics in-progress">
-              <div class="pub-badges">
-                <span class="badge">Under review</span>
-                <span class="badge badge-placeholder">Placeholder</span>
+            <!-- ENTRY 3 (placeholder, under review) -->
+            <article class="card pub-card is-open reveal">
+              <div class="pub-main">
+                <h3 class="pub-title">[Manuscript title: replace with your real title]</h3>
+                <p class="pub-authors">[Author list: replace]</p>
+                <div class="pub-meta">
+                  <span class="type-badge type-review">Under review</span>
+                  <span class="type-badge type-placeholder">Placeholder</span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M10 21v-4h4v4"/></svg>
+                    <span class="pub-journal">[Journal name, if you wish to show it]</span>
+                  </span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></svg>
+                    <span class="pub-year">[Year]</span>
+                  </span>
+                  <span class="meta-item">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></svg>
+                    <span class="pub-category">Microplastics</span>
+                  </span>
+                </div>
+                <div class="pub-extra">
+                  <ul class="tag-list pub-tags">
+                    <li class="tag">[keyword 1]</li>
+                    <li class="tag">[keyword 2]</li>
+                  </ul>
+                  <p class="pub-summary">[Optional short summary. Delete this line if you do not want one.]</p>
+                </div>
               </div>
-              <h3 class="pub-title">[Manuscript title: replace with your real title]</h3>
-              <p class="pub-authors">[Author list: replace]</p>
-              <p class="pub-journal"><em>[Journal name, if you wish to show it]</em> · <span class="pub-year">[Year]</span></p>
+              <button class="pub-toggle" type="button" aria-expanded="true" aria-label="Collapse details">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>
+              </button>
             </article>
 
           </div>
 
-          <p class="empty-message" id="pub-empty" hidden>No publications match this filter yet.</p>
+          <p class="empty-message" id="pub-empty" hidden>No publications match these filters.</p>
         </div>
       </section>
 
