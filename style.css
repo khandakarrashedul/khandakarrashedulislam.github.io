@@ -649,3 +649,15 @@ div.hero-photo {
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .card, .btn, .sidebar { transition: none; }
 }
+/* ---------- CV button when the PDF has not been uploaded yet ---------- */
+.is-unavailable {
+  opacity: 0.55;
+  border-style: dashed;
+  pointer-events: none;
+}
+.is-unavailable::after {
+  content: " (coming soon)";
+  font-size: 0.75em;
+  font-weight: 400;
+  margin-left: 0.3em;
+}
