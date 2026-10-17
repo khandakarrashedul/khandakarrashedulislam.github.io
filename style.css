@@ -831,3 +831,25 @@ div.hero-photo {
   .pub-card { padding-bottom: 3.75rem; }
   .pub-main { padding-right: 0; }
 }
+/* ---------- Publications: Compact view (card is closed) ---------- */
+.pub-card:not(.is-open) .pub-authors,
+.pub-card:not(.is-open) .meta-category {
+  display: none;
+}
+.pub-card:not(.is-open) {
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+.pub-card:not(.is-open) .pub-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.55rem;
+}
+.pub-card:not(.is-open) .pub-main {
+  padding-right: 3rem;
+}
+/* Keep the arrow centred on the right side while the card is compact */
+.pub-card:not(.is-open) .pub-toggle {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+}
