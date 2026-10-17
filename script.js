@@ -1,14 +1,16 @@
 /* =====================================================================
    script.js: small features for the website
-   1. Theme selector (Light / Dark / Forest)
-   2. Sidebar menu on tablet and mobile
-   3. Clock in the top bar (shows the visitor's own local time)
-   4. Contact buttons copy their links from the sidebar icons
-   5. External links open in a new tab
-   6. Publication filter buttons
-   7. Fade-in when scrolling
-   8. Falling background symbols
-   9. Current year in the footer
+   1.  Theme selector (Light / Dark / Forest)
+   2.  Sidebar menu on tablet and mobile
+   3.  Clock in the top bar (shows the visitor's own local time)
+   4.  Contact buttons copy their links from the sidebar icons
+   5.  External links open in a new tab
+   6.  Publication filter buttons
+   7.  Fade-in when scrolling
+   8.  Falling background symbols
+   9.  Current year in the footer
+   10. Profile photo appears automatically when assets/profile.jpg exists
+   11. CV button turns on automatically when assets/cv.pdf exists
    You do not need to edit this file for normal updates.
    ===================================================================== */
 (function () {
@@ -195,4 +197,60 @@
   /* ---------- 9. Footer year ---------- */
   var yearSpot = document.getElementById("current-year");
   if (yearSpot) { yearSpot.textContent = new Date().getFullYear(); }
+
+  /* ---------- 10. Profile photo appears automatically ----------
+     Upload your photo into the assets folder as profile.jpg
+     (profile.jpeg, profile.png and profile.webp also work). */
+  var photoNames = [
+    "assets/profile.jpg",
+    "assets/profile.jpeg",
+    "assets/profile.png",
+    "assets/profile.webp"
+  ];
+  var photoIndex = 0;
+
+  function useProfilePhoto(path) {
+    var heroPlaceholder = document.querySelector("div.hero-photo");
+    if (heroPlaceholder) {
+      var heroImg = document.createElement("img");
+      heroImg.className = "hero-photo";
+      heroImg.src = path;
+      heroImg.alt = "Portrait of Khandakar Rashedul Islam";
+      heroPlaceholder.parentNode.replaceChild(heroImg, heroPlaceholder);
+    }
+    var sidePlaceholder = document.querySelector("span.side-avatar");
+    if (sidePlaceholder) {
+      var sideImg = document.createElement("img");
+      sideImg.className = "side-avatar";
+      sideImg.src = path;
+      sideImg.alt = "";
+      sidePlaceholder.parentNode.replaceChild(sideImg, sidePlaceholder);
+    }
+  }
+
+  function tryNextPhoto() {
+    if (photoIndex >= photoNames.length) { return; }
+    var path = photoNames[photoIndex];
+    photoIndex++;
+    var probe = new Image();
+    probe.onload = function () { useProfilePhoto(path); };
+    probe.onerror = tryNextPhoto;
+    probe.src = path;
+  }
+  if (document.querySelector("div.hero-photo") || document.querySelector("span.side-avatar")) {
+    tryNextPhoto();
+  }
+
+  /* ---------- 11. CV button turns on when the PDF exists ---------- */
+  var cvLinks = document.querySelectorAll('a[href="assets/cv.pdf"]');
+  if (cvLinks.length && window.fetch) {
+    fetch("assets/cv.pdf", { method: "HEAD" }).then(function (response) {
+      if (response.status === 404) {
+        cvLinks.forEach(function (link) {
+          link.classList.add("is-unavailable");
+          link.setAttribute("aria-disabled", "true");
+        });
+      }
+    }).catch(function () { /* network problem: leave the button as it is */ });
+  }
 })();
