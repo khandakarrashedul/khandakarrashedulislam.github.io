@@ -853,3 +853,15 @@ div.hero-photo {
   bottom: auto;
   transform: translateY(-50%);
 }
+/* ---------- Publications: hide the Placeholder and Journal badges (both views) ---------- */
+.type-placeholder,
+.type-journal {
+  display: none;
+}
+
+/* ---------- Publications: DOI button beside the year in Compact view ---------- */
+.compact-doi { display: none; }
+.pub-card:not(.is-open) .compact-doi { display: inline-flex; }
+
+/* In Compact view the bottom button row is hidden (the DOI is shown beside the year instead) */
+.pub-card:not(.is-open) .pub-links { display: none; }
