@@ -1,11 +1,14 @@
 /* =====================================================================
    script.js: small features for the website
-   1. Light / dark theme button
-   2. Mobile and tablet menu button
-   3. Publication filter buttons
-   4. Fade-in when scrolling
-   5. Falling background symbols
-   6. Current year in the footer
+   1. Theme selector (Light / Dark / Forest)
+   2. Sidebar menu on tablet and mobile
+   3. Clock in the top bar (shows the visitor's own local time)
+   4. Contact buttons copy their links from the sidebar icons
+   5. External links open in a new tab
+   6. Publication filter buttons
+   7. Fade-in when scrolling
+   8. Falling background symbols
+   9. Current year in the footer
    You do not need to edit this file for normal updates.
    ===================================================================== */
 (function () {
@@ -17,8 +20,9 @@
   var reduceMotion = window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- 1. Light / dark theme ---------- */
-  var themeBtn = document.getElementById("theme-toggle");
+  /* ---------- 1. Theme selector ---------- */
+  var themeSelect = document.getElementById("theme-select");
+  var allowedThemes = ["light", "dark", "forest"];
 
   function readSavedTheme() {
     try { return localStorage.getItem("theme"); } catch (e) { return null; }
@@ -28,67 +32,61 @@
   }
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
-    if (themeBtn) {
-      themeBtn.setAttribute("aria-label",
-        theme === "dark" ? "Switch to light theme" : "Switch to dark theme");
-    }
+    if (themeSelect) { themeSelect.value = theme; }
   }
 
   var startTheme = readSavedTheme();
-  if (startTheme !== "light" && startTheme !== "dark") {
+  if (allowedThemes.indexOf(startTheme) === -1) {
     startTheme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
       ? "dark" : "light";
   }
   applyTheme(startTheme);
 
-  if (themeBtn) {
-    themeBtn.addEventListener("click", function () {
-      var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-      applyTheme(next);
-      saveTheme(next);
+  if (themeSelect) {
+    themeSelect.addEventListener("change", function () {
+      applyTheme(themeSelect.value);
+      saveTheme(themeSelect.value);
     });
   }
 
-  /* ---------- 2. Mobile / tablet menu ---------- */
-  var navToggle = document.getElementById("nav-toggle");
-  var nav = document.getElementById("main-nav");
+  /* ---------- 2. Sidebar menu (tablet and mobile) ---------- */
+  var sidebar = document.getElementById("sidebar");
+  var overlay = document.getElementById("sidebar-overlay");
+  var menuBtn = document.getElementById("menu-btn");
+  var closeBtn = document.getElementById("sidebar-close");
 
-  function setMenu(open) {
-    if (!nav || !navToggle) { return; }
-    nav.classList.toggle("is-open", open);
-    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  function setSidebar(open, returnFocus) {
+    if (!sidebar || !menuBtn) { return; }
+    sidebar.classList.toggle("is-open", open);
+    if (overlay) { overlay.hidden = !open; }
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (open && closeBtn) { closeBtn.focus(); }
+    if (!open && returnFocus) { menuBtn.focus(); }
   }
 
-  if (nav && navToggle) {
-    navToggle.addEventListener("click", function () {
-      setMenu(!nav.classList.contains("is-open"));
+  if (sidebar && menuBtn) {
+    menuBtn.addEventListener("click", function () {
+      setSidebar(!sidebar.classList.contains("is-open"), false);
     });
-
-    // Close the menu after choosing a link
-    nav.addEventListener("click", function (event) {
-      if (event.target.closest && event.target.closest("a")) { setMenu(false); }
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function () { setSidebar(false, true); });
+    }
+    if (overlay) {
+      overlay.addEventListener("click", function () { setSidebar(false, false); });
+    }
+    // Close after choosing a menu link
+    sidebar.addEventListener("click", function (event) {
+      if (event.target.closest && event.target.closest(".side-nav a")) { setSidebar(false, false); }
     });
-
     // Close with the Escape key
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && nav.classList.contains("is-open")) {
-        setMenu(false);
-        navToggle.focus();
-      }
+      if (event.key === "Escape" && sidebar.classList.contains("is-open")) { setSidebar(false, true); }
     });
-
-    // Close when tapping outside the header
-    document.addEventListener("click", function (event) {
-      if (nav.classList.contains("is-open") && !event.target.closest(".site-header")) {
-        setMenu(false);
-      }
-    });
-
     // Close automatically if the window becomes desktop-sized
     if (window.matchMedia) {
       var desktopQuery = window.matchMedia("(min-width: 1024px)");
-      var onDesktopChange = function () { if (desktopQuery.matches) { setMenu(false); } };
+      var onDesktopChange = function () { if (desktopQuery.matches) { setSidebar(false, false); } };
       if (desktopQuery.addEventListener) {
         desktopQuery.addEventListener("change", onDesktopChange);
       } else if (desktopQuery.addListener) {
@@ -97,7 +95,42 @@
     }
   }
 
-  /* ---------- 3. Publication filter ---------- */
+  /* ---------- 3. Clock ---------- */
+  var clockTime = document.getElementById("clock-time");
+  var clockDate = document.getElementById("clock-date");
+
+  function updateClock() {
+    var now = new Date();
+    if (clockTime) {
+      clockTime.textContent = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    }
+    if (clockDate) {
+      clockDate.textContent = now.toLocaleDateString([], { month: "short", day: "numeric" });
+    }
+  }
+  if (clockTime || clockDate) {
+    updateClock();
+    setInterval(updateClock, 30000);
+  }
+
+  /* ---------- 4. Contact buttons copy links from the sidebar ---------- */
+  var sources = document.querySelectorAll(".sidebar-links [data-profile]");
+  sources.forEach(function (source) {
+    var key = source.getAttribute("data-profile");
+    var targets = document.querySelectorAll('.profile-sync[data-profile="' + key + '"]');
+    targets.forEach(function (button) {
+      button.setAttribute("href", source.getAttribute("href"));
+      button.classList.toggle("is-placeholder", source.classList.contains("is-placeholder"));
+    });
+  });
+
+  /* ---------- 5. External links open in a new tab ---------- */
+  document.querySelectorAll('a[href^="http"]').forEach(function (link) {
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener");
+  });
+
+  /* ---------- 6. Publication filter ---------- */
   var filterButtons = document.querySelectorAll(".filter-btn");
   var pubCards = document.querySelectorAll(".pub-card");
   var emptyMessage = document.getElementById("pub-empty");
@@ -124,7 +157,7 @@
     });
   }
 
-  /* ---------- 4. Fade-in on scroll ---------- */
+  /* ---------- 7. Fade-in on scroll ---------- */
   var revealItems = document.querySelectorAll(".reveal");
   if (revealItems.length) {
     if ("IntersectionObserver" in window && !reduceMotion) {
@@ -142,7 +175,7 @@
     }
   }
 
-  /* ---------- 5. Falling background symbols ---------- */
+  /* ---------- 8. Falling background symbols ---------- */
   var glyphBox = document.getElementById("bg-glyphs");
   if (glyphBox && !reduceMotion) {
     var symbols = ["⚛", "⚗", "✦", "◆", "∑", "π", "λ", "Ω", "∞", "✳"];
@@ -159,7 +192,7 @@
     }
   }
 
-  /* ---------- 6. Footer year ---------- */
+  /* ---------- 9. Footer year ---------- */
   var yearSpot = document.getElementById("current-year");
   if (yearSpot) { yearSpot.textContent = new Date().getFullYear(); }
 })();
