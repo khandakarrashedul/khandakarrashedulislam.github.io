@@ -372,4 +372,28 @@
   });
   // Close all cards when the page opens
   if (pubCards.length) { setView("compact"); }
+
+  /* ---------- 14. DOI button beside the year in Compact view ---------- */
+  pubCards.forEach(function (card) {
+    var meta = card.querySelector(".pub-meta");
+    if (!meta) { return; }
+
+    // Find the DOI button in the bottom button row
+    var doiLink = null;
+    card.querySelectorAll(".pub-links a").forEach(function (link) {
+      if (link.textContent.trim().toLowerCase() === "doi") { doiLink = link; }
+    });
+    if (!doiLink) { return; }
+
+    // Make a copy and place it right after the year
+    var copy = doiLink.cloneNode(true);
+    copy.classList.add("compact-doi");
+    var yearEl = card.querySelector(".pub-year");
+    var yearItem = yearEl ? yearEl.closest(".meta-item") : null;
+    if (yearItem) {
+      yearItem.insertAdjacentElement("afterend", copy);
+    } else {
+      meta.appendChild(copy);
+    }
+  });
 })();
