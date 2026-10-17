@@ -661,3 +661,173 @@ div.hero-photo {
   font-weight: 400;
   margin-left: 0.3em;
 }
+/* =====================================================================
+   PUBLICATIONS: filter panel, cards, and the active sidebar link
+   (matches the reference publications page)
+   ===================================================================== */
+
+/* ---------- Filter panel ---------- */
+.filter-panel { display: none; }
+.js .filter-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field-grow { flex: 1 1 220px; }
+.field-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.field-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.95rem;
+}
+.field select.field-input { min-width: 150px; cursor: pointer; }
+
+.view-toggle {
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+}
+.view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 36px;
+  padding: 0.3rem 0.9rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.view-btn[aria-pressed="true"] {
+  background: var(--surface);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+}
+.icon-sm { width: 16px; height: 16px; }
+
+/* ---------- Publication cards ---------- */
+.pub-card { position: relative; padding: 1.4rem 1.5rem; }
+.pub-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 14px 34px var(--hero-glow);
+}
+.pub-main { padding-right: 3rem; }
+.pub-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.pub-authors { color: var(--text); font-weight: 500; margin-bottom: 0.7rem; }
+
+.pub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.meta-item { display: inline-flex; align-items: center; gap: 0.45rem; }
+.pub-year { font-weight: 600; }
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.type-journal { background: #e3f5e8; color: #1c6b3a; border-color: #bfe5cb; }
+.type-preprint { background: #ece7fb; color: #5b3fc4; border-color: #d6cdf6; }
+.type-review, .type-placeholder { background: var(--warn-bg); color: var(--warn-text); }
+[data-theme="dark"] .type-journal { background: #12301f; color: #8fe0ad; border-color: #1f4d33; }
+[data-theme="dark"] .type-preprint { background: #2a2150; color: #c4b5fd; border-color: #3d3274; }
+
+/* Details that collapse (Compact view hides them) */
+.pub-extra { display: none; margin-top: 0.9rem; }
+.pub-card.is-open .pub-extra { display: block; }
+.pub-tags { margin: 0 0 0.9rem; }
+.pub-tags .tag {
+  background: var(--tile-bg);
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.78rem;
+  border-radius: 8px;
+}
+.pub-summary { color: var(--text); margin-bottom: 0.9rem; }
+.pub-links .btn { border-radius: 10px; }
+
+/* Collapse / expand arrow */
+.pub-toggle {
+  display: none;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+}
+.js .pub-toggle { display: inline-flex; }
+.pub-toggle:hover { color: var(--primary); border-color: var(--primary); }
+.pub-toggle .icon { transition: transform 0.2s ease; }
+.pub-card:not(.is-open) .pub-toggle .icon { transform: rotate(180deg); }
+
+/* ---------- Active link in the sidebar (changes as you scroll) ---------- */
+.side-nav a { position: relative; }
+.side-nav a.is-active {
+  background: var(--tag-bg);
+  color: var(--primary);
+  font-weight: 600;
+}
+.side-nav a.is-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 22px;
+  border-radius: 3px;
+  background: var(--primary);
+  transform: translateY(-50%);
+}
+.side-nav a.is-active .nav-icon { background: rgba(0, 102, 204, 0.15); color: var(--primary); }
+[data-theme="dark"] .side-nav a.is-active .nav-icon { background: rgba(77, 163, 255, 0.25); }
+[data-theme="forest"] .side-nav a.is-active .nav-icon { background: rgba(31, 122, 77, 0.18); }
+
+/* ---------- Mobile (640px and narrower) ---------- */
+@media (max-width: 640px) {
+  .js .filter-panel { flex-direction: column; align-items: stretch; }
+  .field select.field-input { width: 100%; }
+  .view-toggle { align-self: flex-start; }
+  .pub-card { padding-bottom: 3.75rem; }
+  .pub-main { padding-right: 0; }
+}
