@@ -39,11 +39,12 @@
   }
 
   var startTheme = readSavedTheme();
-  if (allowedThemes.indexOf(startTheme) === -1) {
-    startTheme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ? "dark" : "light";
-  }
-  applyTheme(startTheme);
+
+if (allowedThemes.indexOf(startTheme) === -1) {
+  startTheme = "forest";
+}
+
+applyTheme(startTheme);
 
   if (themeSelect) {
     themeSelect.addEventListener("change", function () {
