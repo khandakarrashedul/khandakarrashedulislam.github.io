@@ -258,7 +258,7 @@ p { margin: 0 0 0.9rem; }
 }
 .profile-icon:hover { background: var(--tile-bg); color: var(--primary); }
 
-.sidebar-close { display: none; position: absolute; top: 0.75rem; right: 0.75rem; }
+.icon-btn.sidebar-close { display: none; position: absolute; top: 0.75rem; right: 0.75rem; }
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -601,7 +601,7 @@ div.hero-photo {
     visibility: visible;
     transition: transform 0.25s ease, visibility 0s;
   }
-  .sidebar-close { display: inline-flex; }
+   .icon-btn.sidebar-close { display: inline-flex; }
   .menu-btn { display: inline-flex; }
   .clock { margin-left: 0; }
   .topbar { padding: 0 1rem; }
