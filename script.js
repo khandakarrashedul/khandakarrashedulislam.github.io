@@ -372,24 +372,4 @@
   });
   // Close all cards when the page opens
   if (pubCards.length) { setView("compact"); }
-
-  /* ---------- 14. DOI button stays visible in Compact view ---------- */
-  pubCards.forEach(function (card) {
-    var main = card.querySelector(".pub-main");
-    var links = card.querySelector(".pub-links");
-    if (!main || !links) { return; }
-
-    // Move the button row out of the hidden details area
-    main.appendChild(links);
-
-    // Mark the DOI button so Compact view can keep it
-    var foundDoi = false;
-    links.querySelectorAll("a").forEach(function (link) {
-      if (link.textContent.trim().toLowerCase() === "doi") {
-        link.classList.add("is-doi");
-        foundDoi = true;
-      }
-    });
-    if (!foundDoi) { links.classList.add("no-doi"); }
-  });
 })();
