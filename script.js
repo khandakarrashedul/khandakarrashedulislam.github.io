@@ -362,4 +362,14 @@
     window.addEventListener("resize", onScroll);
     updateActiveLink();
   }
+
+  /* ---------- 13. Publications always start in Compact view ---------- */
+  // Mark the category item so Compact view can hide it
+  pubCards.forEach(function (card) {
+    var cat = card.querySelector(".pub-category");
+    var item = cat ? cat.closest(".meta-item") : null;
+    if (item) { item.classList.add("meta-category"); }
+  });
+  // Close all cards when the page opens
+  if (pubCards.length) { setView("compact"); }
 })();
