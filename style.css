@@ -291,7 +291,7 @@ p { margin: 0 0 0.9rem; }
 }
 .topbar-left { display: flex; align-items: center; gap: 1rem; }
 
-.clock { display: flex; flex-direction: column; line-height: 1.15; margin-left: 1rem; }
+.clock { display: flex; flex-direction: column; line-height: 1.15; margin-left: 0.5rem; }
 .clock-time { font-weight: 700; color: var(--heading); font-size: 1.05rem; }
 .clock-date { font-size: 0.75rem; color: var(--muted); text-align: right; }
 
@@ -903,5 +903,5 @@ div.hero-photo {
 }
 
 /* LOGO IN THE TOP BAR */
-.site-logo { display: inline-flex; flex: 0 0 auto; }
+.site-logo { display: inline-flex; flex: 0 0 auto; margin-left: 0.5rem;}
 .site-logo img { display: block; width: 56px; height: 56px; object-fit: contain; border-radius: 8px; }
