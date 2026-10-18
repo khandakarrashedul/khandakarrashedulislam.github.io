@@ -905,3 +905,30 @@ div.hero-photo {
 /* LOGO IN THE TOP BAR */
 .site-logo { display: inline-flex; flex: 0 0 auto;}
 .site-logo img { display: block; width: 56px; height: 56px; object-fit: contain; border-radius: 8px; }
+/* =====================================================================
+   CV PREVIEW ON TABLET AND PHONE (pages drawn by script.js)
+   ===================================================================== */
+.cv-pages { display: none; }
+
+@media (max-width: 1023px) {
+  .cv-frame { display: none; }
+  .cv-pages {
+    display: block;
+    max-height: 75vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5rem;
+    background: var(--tile-bg);
+  }
+  .cv-pages:empty { display: none; }
+  .cv-pages canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 0.5rem;
+    background: #ffffff;
+    box-shadow: var(--shadow);
+  }
+  .cv-viewer.has-pages .cv-fallback { display: none; }
+  .cv-viewer.cv-failed .cv-fallback { display: block; }
+}
