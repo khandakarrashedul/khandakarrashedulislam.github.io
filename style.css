@@ -905,7 +905,7 @@ div.hero-photo {
    LOGO IN THE TOP BAR
    ===================================================================== */
 .site-logo { display: inline-flex; flex: 0 0 auto; }
-.site-logo img { display: block; width: 36px; height: 36px; border-radius: 8px; }
+.site-logo img { display: block; width: 36px; height: 36px; object-fit: contain; border-radius: 8px; }
 .site-logo + .clock { margin-left: 0; }
 
 @media (max-width: 640px) {
