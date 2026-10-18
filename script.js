@@ -397,4 +397,12 @@ applyTheme(startTheme);
       meta.appendChild(copy);
     }
   });
+
+  /* ---------- 15. Hide the CV viewer until cv.pdf has been uploaded ---------- */
+  var cvSection = document.getElementById("cv");
+  if (cvSection && window.fetch) {
+    fetch("assets/cv.pdf", { method: "HEAD" }).then(function (response) {
+      if (response.status === 404) { cvSection.classList.add("cv-missing"); }
+    }).catch(function () { /* network problem: leave the viewer as it is */ });
+  }
 })();
