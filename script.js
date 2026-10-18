@@ -405,4 +405,90 @@ applyTheme(startTheme);
       if (response.status === 404) { cvSection.classList.add("cv-missing"); }
     }).catch(function () { /* network problem: leave the viewer as it is */ });
   }
+
+  /* ---------- 16. CV preview on tablet and phone ----------
+     Draws each page of assets/cv.pdf using PDF.js (from cdnjs).
+     Desktop keeps the browser's own PDF viewer. */
+  var PDFJS_BASE = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+  var cvViewerBox = document.querySelector(".cv-viewer");
+  var cvPagesBox = document.getElementById("cv-pages");
+  var cvSectionEl = document.getElementById("cv");
+  var smallScreenQuery = window.matchMedia ? window.matchMedia("(max-width: 1023px)") : null;
+  var cvPreviewStarted = false;
+
+  function cvPreviewFailed() {
+    if (cvViewerBox) { cvViewerBox.classList.add("cv-failed"); }
+  }
+
+  function loadExternalScript(src, onDone, onFail) {
+    var tag = document.createElement("script");
+    tag.src = src;
+    tag.onload = onDone;
+    tag.onerror = onFail;
+    document.head.appendChild(tag);
+  }
+
+  function drawCvPage(pdf, pageNumber, cssWidth, ratio) {
+    return pdf.getPage(pageNumber).then(function (page) {
+      var base = page.getViewport({ scale: 1 });
+      var viewport = page.getViewport({ scale: (cssWidth / base.width) * ratio });
+      var canvas = document.createElement("canvas");
+      canvas.width = Math.floor(viewport.width);
+      canvas.height = Math.floor(viewport.height);
+      canvas.setAttribute("role", "img");
+      canvas.setAttribute("aria-label", "CV page " + pageNumber + " of " + pdf.numPages);
+      cvPagesBox.appendChild(canvas);
+      cvViewerBox.classList.add("has-pages");
+      return page.render({ canvasContext: canvas.getContext("2d"), viewport: viewport }).promise;
+    });
+  }
+
+  function renderCvPages() {
+    var pdfjs = window.pdfjsLib;
+    if (!pdfjs) { cvPreviewFailed(); return; }
+    pdfjs.GlobalWorkerOptions.workerSrc = PDFJS_BASE + "pdf.worker.min.js";
+
+    pdfjs.getDocument("assets/cv.pdf").promise.then(function (pdf) {
+      var cssWidth = Math.max(cvPagesBox.clientWidth - 16, 200);
+      var ratio = Math.min(window.devicePixelRatio || 1, 2);
+      var chain = Promise.resolve();
+      for (var n = 1; n <= pdf.numPages; n++) {
+        (function (pageNumber) {
+          chain = chain.then(function () {
+            return drawCvPage(pdf, pageNumber, cssWidth, ratio);
+          });
+        })(n);
+      }
+      return chain;
+    }).catch(cvPreviewFailed);
+  }
+
+  function startCvPreview() {
+    if (cvPreviewStarted || !cvViewerBox || !cvPagesBox) { return; }
+    if (!smallScreenQuery || !smallScreenQuery.matches) { return; }
+    cvPreviewStarted = true;
+    loadExternalScript(PDFJS_BASE + "pdf.min.js", renderCvPages, cvPreviewFailed);
+  }
+
+  if (cvSectionEl && cvViewerBox && cvPagesBox) {
+    if ("IntersectionObserver" in window) {
+      var cvWatcher = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { startCvPreview(); }
+      }, { rootMargin: "400px 0px" });
+      cvWatcher.observe(cvSectionEl);
+    } else {
+      startCvPreview();
+    }
+    if (smallScreenQuery) {
+      var onSizeChange = function () {
+        var box = cvSectionEl.getBoundingClientRect();
+        if (box.top < window.innerHeight + 400) { startCvPreview(); }
+      };
+      if (smallScreenQuery.addEventListener) {
+        smallScreenQuery.addEventListener("change", onSizeChange);
+      } else if (smallScreenQuery.addListener) {
+        smallScreenQuery.addListener(onSizeChange);
+      }
+    }
+  }
 })();
