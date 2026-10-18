@@ -904,4 +904,4 @@ div.hero-photo {
 
 /* LOGO IN THE TOP BAR */
 .site-logo { display: inline-flex; flex: 0 0 auto; }
-.site-logo img { display: block; width: 36px; height: 36px; object-fit: contain; border-radius: 8px; }
+.site-logo img { display: block; width: 81px; height: 81px; object-fit: contain; border-radius: 8px; }
