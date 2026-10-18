@@ -1006,17 +1006,24 @@
         </div>
       </section>
 
-      <!-- ===================== CV ===================== -->
+<!-- ===================== CV ===================== -->
       <section class="section" id="cv">
         <div class="container">
           <div class="section-head reveal">
             <p class="eyebrow">Resume</p>
             <h2>Curriculum Vitae</h2>
           </div>
-          <div class="card cv-card reveal">
-            <p>View or download my curriculum vitae as a PDF.</p>
-            <!-- This link works once you upload your CV as assets/cv.pdf -->
-            <a class="btn btn-primary" href="assets/cv.pdf" target="_blank" rel="noopener">View / Download CV (PDF)</a>
+
+          <!-- These buttons work once you upload your CV as assets/cv.pdf -->
+          <div class="cv-actions reveal">
+            <a class="btn btn-primary" href="assets/cv.pdf" target="_blank" rel="noopener">Open in new tab</a>
+            <a class="btn btn-outline" href="assets/cv.pdf" download>Download PDF</a>
+          </div>
+
+          <!-- CV viewer: shows the PDF inside the page -->
+          <div class="cv-viewer reveal">
+            <iframe class="cv-frame" src="assets/cv.pdf#toolbar=1&amp;navpanes=1&amp;view=FitH" title="Curriculum vitae (PDF)"></iframe>
+            <p class="cv-fallback">The PDF preview is not available on this device. Please use the buttons above to open or download my CV.</p>
           </div>
         </div>
       </section>
