@@ -291,7 +291,7 @@ p { margin: 0 0 0.9rem; }
 }
 .topbar-left { display: flex; align-items: center; gap: 1rem; }
 
-.clock { display: flex; flex-direction: column; line-height: 1.15; margin-left: 2.5rem; }
+.clock { display: flex; flex-direction: column; line-height: 1.15; margin-left: 1rem; }
 .clock-time { font-weight: 700; color: var(--heading); font-size: 1.05rem; }
 .clock-date { font-size: 0.75rem; color: var(--muted); text-align: right; }
 
