@@ -932,3 +932,14 @@ div.hero-photo {
   .cv-viewer.has-pages .cv-fallback { display: none; }
   .cv-viewer.cv-failed .cv-fallback { display: block; }
 }
+/* =====================================================================
+   OFFICIAL PROFILE LOGOS IN THE SIDEBAR
+   ===================================================================== */
+.profile-icon img {
+  display: block;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  transition: transform 0.15s ease;
+}
+.profile-icon:hover img { transform: scale(1.12); }
